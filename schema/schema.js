@@ -88,7 +88,6 @@ const Mutation = new GraphQLObjectType({
                     age: args.age,
                     username: args.username
                 })
-
                 user.save()
             }
         }
