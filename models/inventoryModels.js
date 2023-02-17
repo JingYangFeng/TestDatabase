@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const coll = 'inventoryModels'
+const coll = 'items'
 
 const inventoryModelSchema = new Schema({
     // an id of a model
@@ -10,4 +10,4 @@ const inventoryModelSchema = new Schema({
 })
 
 
-module.exports = mongoose.model("inventoryModels", userSchema, coll)
+module.exports = mongoose.model("Inventory", inventoryModelSchema, coll)

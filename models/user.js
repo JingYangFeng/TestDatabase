@@ -8,7 +8,7 @@ const userSchema = new Schema({
     age: Number,            // Age
     username: String,       // Username
     
-    badge: Array,           // Badges: Ex Beginner, Advance, etc. (Each badge has certain permissions. Level+1 has all permisions of Levels and a few more)
+    badge: Array,           // Badge:  Ex Beginner, Advance, etc. (Each badge has certain permissions. Level+1 has all permisions of Levels and a few more)
                             //         Ex an Intermediate level has all permissions as Beginner level + a few more
     inventory: Array        // Each element in this array has the id for the specific models in inventoryModels collection
 })
