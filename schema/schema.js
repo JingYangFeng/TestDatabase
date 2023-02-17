@@ -19,7 +19,8 @@ const UserType = new GraphQLObjectType({
         name: { type: GraphQLString },
         age: { type: GraphQLInt },
         username: { type: GraphQLString },
-        badge: { type: new GraphQLList(GraphQLString) }
+        badge: { type: new GraphQLList(GraphQLString) },
+        inventory: {type: new GraphQLList(GraphQLID)}
     })
 })
 
