@@ -3,7 +3,8 @@ const { GraphQLObjectType,
     GraphQLString,
     GraphQLInt,
     GraphQLSchema,
-    GraphQLID
+    GraphQLID,
+    GraphQLList
 } = graphql
 
 const _ = require('lodash')
@@ -30,7 +31,8 @@ const UserType = new GraphQLObjectType({
         id: { type: GraphQLID },
         name: { type: GraphQLString },
         age: { type: GraphQLInt },
-        username: { type: GraphQLString }
+        username: { type: GraphQLString },
+        badge: { type: GraphQLString }
     })
 })
 
@@ -48,22 +50,46 @@ const EmailType = new GraphQLObjectType({
 const RootQuery = new GraphQLObjectType({
     name: 'RootQueryType',
     fields: {
+
+        // Finding users ==================================
+        // Finds a single user by id or name
         user: {
             type: UserType,
-            args: { id: {type: GraphQLID }},
+            args: { 
+                id: {type: GraphQLID },
+                username: {type: GraphQLString}
+            },
+
             resolve(parent, args){
                 // to get data from database / other source
-                return _.find(dummyUsers, { id: args.id })
+                if (args.username) return User.findOne({username: args.username})
+                if (args.id) return User.findById(args.id)
                 
             }
         },
 
+
+        // Lists all users
+        users: {
+            type: new GraphQLList(UserType),
+            resolve(parent, args) {
+                return User.find({})
+            }
+        },
+
+
+
+
+        // Finding email ==================================
         email: {
             type: EmailType,
-            args: { id: {type: GraphQLID }},
+            args: { 
+                id: {type: GraphQLID },
+                email: {type: GraphQLString}
+            },
             resolve(parent, args){
                 // to get data from database / other source
-                return _.find(dummyEmails, { id: args.id })
+                return User.findOne({email: args.id})
                 
             }
         }
@@ -80,13 +106,15 @@ const Mutation = new GraphQLObjectType({
             args: {
                 name: { type: GraphQLString },
                 age: { type: GraphQLInt },
-                username: { type: GraphQLString}
+                username: { type: GraphQLString},
+                badge: { type: GraphQLString }
             },
             resolve(parent, args){
                 let user = new User({
                     name: args.name,
                     age: args.age,
-                    username: args.username
+                    username: args.username,
+                    badge: args.badge
                 })
                 user.save()
             }
