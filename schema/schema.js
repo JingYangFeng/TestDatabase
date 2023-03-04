@@ -10,7 +10,7 @@ const { GraphQLObjectType,
 const _ = require('lodash')
 const inventoryModels = require('../models/inventoryModels')
 const User = require('../models/user')
-
+const Inventory = require('../models/inventoryModels')
 
 const UserType = new GraphQLObjectType({
     name: 'User',
@@ -35,7 +35,7 @@ const EmailType = new GraphQLObjectType({
 })
 
 
-const inventoryType = new GraphQLObjectType({
+const InventoryType = new GraphQLObjectType({
     name: 'Inventory',
     fields: () => ({
         id: { type: GraphQLID },
@@ -95,7 +95,7 @@ const RootQuery = new GraphQLObjectType({
 
         // Finding Inventory Items ==================================
         inventory: {
-            type: inventoryType,
+            type: InventoryType,
             args: { 
                 id: {type: GraphQLID },
                 name: {type: GraphQLString},
@@ -147,7 +147,7 @@ const Mutation = new GraphQLObjectType({
                 age: { type: GraphQLInt },
                 username: { type: GraphQLString},
                 badge: { type: GraphQLString },
-                inventory:{ type: GraphQLString }
+                inventory:{ type: GraphQLString }   // Inventory is an array of IDs
             },
             resolve(parent, args){
                 User.findOneAndUpdate({
@@ -163,15 +163,15 @@ const Mutation = new GraphQLObjectType({
 
         // Add Inventory Item to overall database =================
         addItem: {
-            type: inventoryType,
+            type: InventoryType,
             args: {
                 name: { type: GraphQLString },
                 quantity: { type: GraphQLInt }
             },
             resolve(parent, args){
-                let user = new Inventory({
+                let inventory = new Inventory({
                     name: args.name,
-                    quantity: args.age
+                    quantity: args.quantity
                 })
                 inventory.save()
             }
