@@ -20,6 +20,14 @@ const userSchema = new Schema({
 //      - Optional tutorial
 //      - This level is time dependent (time stamp table)
 
+// ==============================
+// Definitive to adds:
+//     - Wallet
+//         - Under construction
+    
+//     - Games
+//         - Under construction
+
 
 // ========================
 // To adds:
