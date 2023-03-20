@@ -181,21 +181,18 @@ const Mutation = new GraphQLObjectType({
         updateUser: {
             type: UserType,
             args: {
+                username: { type: GraphQLString},
+
                 name: { type: GraphQLString },
                 age: { type: GraphQLInt },
-                username: { type: GraphQLString},
-                badge: { type: GraphQLString },
-                inventory:{ type: GraphQLString }   // Inventory is an array of IDs
             },
             resolve(parent, args){
-                User.findOneAndUpdate({
-                    name: args.name,
-                    age: args.age,
-                    username: args.username,
-                    badge: args.badge,
-                    inventory: args.inventory
-                })
-                
+                return User.updateOne(
+                    { username: args.username }, // Usernames must match to change user information
+                    { $set:{
+                        name: args.name, 
+                        age: args.age} 
+                    })
             }
         },
 
