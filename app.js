@@ -21,7 +21,7 @@ app.use('/graphql', graphqlHTTP({
 // db connection
 let db
 
-let coll = '/usersGame'
+let coll = '/users'
 
 
 connectToDb((err) => {

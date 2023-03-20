@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const coll = 'usersGame'
+const coll = 'users'
 
 const userSchema = new Schema({
     name: String,           // Name
