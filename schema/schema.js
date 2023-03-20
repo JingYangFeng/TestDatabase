@@ -11,6 +11,8 @@ const _ = require('lodash')
 const inventoryModels = require('../models/inventoryModels')
 const User = require('../models/user')
 const Inventory = require('../models/inventoryModels')
+const EventPost = require('../models/events')
+
 
 const UserType = new GraphQLObjectType({
     name: 'User',
@@ -43,6 +45,21 @@ const InventoryType = new GraphQLObjectType({
         quantity: { type: GraphQLInt }
     })
 })
+
+
+const EventPostType = new GraphQLObjectType({
+    name: 'EventPost',
+    fields: () => ({
+        id: { type: GraphQLID },
+        name: { type: GraphQLString },
+        start: { type: GraphQLInt },
+        end: { type: GraphQLInt },
+        location: { type: GraphQLString }
+    })
+})
+
+
+
 
 
 const RootQuery = new GraphQLObjectType({
@@ -105,6 +122,24 @@ const RootQuery = new GraphQLObjectType({
                 return inventory.findOne({name: args.id})
                 
             }
+        },
+
+
+        // Finding Events ==================================
+        eventPost: {
+            type: EventPostType,
+            args: { 
+                id: {type: GraphQLID },
+                name: { type: GraphQLString },
+                start: { type: GraphQLInt },
+                end: { type: GraphQLInt },
+                location: { type: GraphQLString }
+            },
+            resolve(parent, args){
+                // to get data from database / other source
+                return eventPost.findOne({name: args.id})
+                
+            }
         }
 
     }
@@ -124,7 +159,8 @@ const Mutation = new GraphQLObjectType({
                 age: { type: GraphQLInt },
                 username: { type: GraphQLString},
                 badge: { type: new GraphQLList(GraphQLString) },
-                inventory:{ type: GraphQLString }
+                inventory:{ type: GraphQLString },
+                eventsRegistered: { type: new GraphQLList(GraphQLString)}
             },
             resolve(parent, args){
                 let user = new User({
@@ -132,7 +168,9 @@ const Mutation = new GraphQLObjectType({
                     age: args.age,
                     username: args.username,
                     badge: args.badge,
-                    inventory: args.inventory
+                    inventory: args.inventory,
+                    eventsRegistered: args.eventsRegistered
+
                 })
                 user.save()
             }
@@ -174,6 +212,26 @@ const Mutation = new GraphQLObjectType({
                     quantity: args.quantity
                 })
                 inventory.save()
+            }
+        },
+
+        // Add Event to events database =================
+        addEvent: {
+            type: EventPostType,
+            args: {
+                name: { type: GraphQLString },
+                start: { type: GraphQLInt },
+                end: { type: GraphQLInt },
+                location: { type: GraphQLString }
+            },
+            resolve(parent, args){
+                let eventPost = new eventPost({
+                    name: args.name,
+                    start: args.start,
+                    end: args.end,
+                    location: args.location
+                })
+                eventPost.save()
             }
         },
     }
