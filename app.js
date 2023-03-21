@@ -3,11 +3,15 @@ const { ObjectId } = require('mongodb');
 const { connectToDb, getDb } = require('./database');
 
 const schema = require('./schema/schema');
+const cors = require('cors')
 const { graphqlHTTP } = require('express-graphql');
 
 
 // init app & middleware
 const app = express();
+
+// allow cross-origin requests
+app.use(cors());
 
 
 app.use('/graphql', graphqlHTTP({

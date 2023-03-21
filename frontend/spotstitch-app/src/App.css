@@ -7,6 +7,24 @@
   pointer-events: none;
 }
 
+.main-point {
+  color: brown;
+  display: 'inline';
+  float: 'left';
+}
+
+.sub-point1 {
+  margin-left: 0;
+  padding-left: 40px;
+}
+
+.no-bullet{
+  list-style-type: none;
+  margin-bottom: 60px;
+}
+
+
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
