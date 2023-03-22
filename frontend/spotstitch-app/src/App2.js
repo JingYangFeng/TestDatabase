@@ -1,14 +1,19 @@
 import './App.css';
 import React, { Component } from 'react';
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from 'react-apollo';
 
+// Components
 import UserList from './Components/UserList';
 import AddUser from './Components/AddUser';
+import UserList2 from './Archive/UserList2';
 
+
+// Apollo clinet setup
 const client = new ApolloClient({
-  uri: "http://localhost:3000/graphql",
-  cache: new InMemoryCache()
+  uri: "http://localhost:3000/graphql"
 })
+
 
 function App() {
   return (

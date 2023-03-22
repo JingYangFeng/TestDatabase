@@ -1,19 +1,8 @@
 import React, { Component } from 'react'
-import { gql } from "apollo-boost"
 import { graphql } from 'react-apollo'
+import { getUsersQuery } from '../Queries/queries'
 
-const getUsersQuery = gql`
-    {
-        users {
-            id
-            username
-            name
-            age
-            badge
-            inventory
-        }
-    }
-`
+
 
 class AddUser extends Component {
 
@@ -44,7 +33,13 @@ class AddUser extends Component {
           <input type="text"/>
         </div>
 
+        <div className='field'>
+          <label>Age:</label>
+          <input type="text"/>
+        </div>
 
+        {/* button
+        
         <div className='field'>
           <label>Age:</label>
           <select>
@@ -52,7 +47,7 @@ class AddUser extends Component {
           </select>
         </div>
 
-        <button>+</button>
+        <button>+</button> */}
 
         {/* badge and inventory defaults here */}
 
@@ -62,4 +57,4 @@ class AddUser extends Component {
   }
 }
 
-export default graphql(getUsersQuery)(AddUser)
+export default AddUser

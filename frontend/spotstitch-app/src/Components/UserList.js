@@ -1,52 +1,29 @@
-import React, { Component } from 'react'
-import { gql } from "apollo-boost"
-import { graphql } from 'react-apollo'
+import React from 'react'
+import { useQuery } from '@apollo/client'
+import { getUsersQuery } from '../Queries/queries'
 
-const getUsersQuery = gql`
-    {
-        users {
-            id
-            username
-            name
-            age
-            badge
-            inventory
-        }
-    }
-`
+function UserList() {
 
-class UserList extends Component {
+  const { error, data, loading} = useQuery(getUsersQuery)
 
-    displayUsers(){
-        console.log(this.props)
-        var data = this.props.data
-        if (data.loading) {
-            return ( <div>Loading Users...</div> )
-        } else {
-            return data.users.map(user => {
-                return(
-                    <>
-                        <h3 className='main-point' key={user.id}>Username: {user.username} </h3>
-                        <ol className='no-bullet'>
-                            <li>Name: {user.name}</li>
-                            <li>Age: {user.age}</li>
-                        </ol>
+  console.log({ error, loading, data })
 
-                    </>
-                );
-            })
-        }
-    }
+  if (loading) return <div>Loading...</div>
+  if (error) return <div>Error: {error}</div>
 
-  render() {
-    return (
-      <div>
-        <ul id="user-list">
-            { this.displayUsers() }
-        </ul>
-      </div>
-    )
-  }
+  return data.users.map(user => {
+    return(
+        <>
+            <h3 className='main-point' key={user.id}>Username: {user.username} </h3>
+            <ol className='no-bullet'>
+                <li>Name: {user.name}</li>
+                <li>Age: {user.age}</li>
+            </ol>
+
+        </>
+    );
+  })
+
 }
 
-export default graphql(getUsersQuery)(UserList)
+export default UserList
