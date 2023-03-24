@@ -1,40 +1,63 @@
 import React, { useState } from 'react'
-import { useLazyQuery } from '@apollo/client'
+import { useLazyQuery, useQuery } from '@apollo/client'
 import { GET_USER } from '../Queries/queries'
-import RenderArray from './RenderArray'
+import DisplayUser from './DisplayUser';
+
 
 function SearchUser() {
 
-  const [searchUser, { error, data, loading, }] = useLazyQuery(GET_USER)
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  
+  // const [searchUser, { error, data, loading }] = useQuery(GET_USER, {
+  const [ getUser, { error, data, loading }] = useLazyQuery(GET_USER, {
+    onCompleted: (queryData) => {
+      console.log(queryData)
 
-  const [usernameInput, setUsername] = useState("");
-  const [emailInput, setEmail] = useState("");
+      console.log("_____________________________")
+      
 
-  console.log("===================================")
-  console.log(data)
-
+    },
+    onCompleted: (errorData) => {
+      // console.log(errorData)
+    }
+  },
+  {
+    refetchQueries: [{query: GET_USER}]
+  }
+  );
+  
   if (loading) return <div>Loading...</div>
   if (error) return <div>Error: {error}</div>
 
+  if (data) console.log(data.user)
+
+
   return (
     <>
+    
       <div className='field'>
-        <label>username: </label>
-        <input type="text" value={usernameInput} onChange={ (e) => {setUsername(e.target.value) }}/>
+        <label>Username: </label>
+        <input type="text" onChange={(e) => setUsername(e.target.value)} />
       </div>
 
       <div className='field'>
-        <label>email: </label>
-        <input type="text" value={emailInput} onChange={ (e) => {setEmail(e.target.value) }}/>
+        <label>Email: </label>
+      <input type="text" onChange={(e) => setEmail(e.target.value)} />
       </div>
 
-
-      <button
-        onClick={() => searchUser( { variables: { username: usernameInput, email: emailInput } } )}
+      <button 
+        onClick={() => getUser({variables: {username: username, email: email}})}
       >
-        Search
+        Search User
       </button>
 
+
+      <div>
+        {(data) ? <DisplayUser user={data.user} /> : '' }
+      </div>
+      
+      
     </>
   );
 

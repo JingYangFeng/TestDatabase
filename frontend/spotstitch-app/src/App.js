@@ -19,7 +19,7 @@ function App() {
           <h1>Adding Users</h1>
           <AddUser/>
 
-          <h1>Search User by username or email</h1>
+          <h1>Search user by username or email</h1>
           <SearchUser/>
 
           <h1>List of Users</h1>

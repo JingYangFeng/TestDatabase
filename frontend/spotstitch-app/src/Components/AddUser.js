@@ -4,17 +4,19 @@ import { ADD_USER, GET_USERS_QUERY } from '../Queries/queries'
 
 function AddUser() {
 
-
-  const { error, data, loading } = useQuery(GET_USERS_QUERY)
-  const [createUser, 
-    { error: createUserErr, data: createUserdata, loading: createUserLoading}] = useMutation(ADD_USER)
-
-
   const [username, setUsername] = useState();
   const [name, setName] = useState();
   const [age, setAge] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+
+  const { error, data, loading } = useQuery(GET_USERS_QUERY)
+  const [createUser, 
+    { error: createUserErr, data: createUserdata, loading: createUserLoading}] = useMutation(ADD_USER, {
+      refetchQueries: [{query: GET_USERS_QUERY}]
+    })
+
+
 
 
   console.log({ error, loading, data })
@@ -35,7 +37,7 @@ function AddUser() {
               username: username, 
               age: parseInt(age), 
               email: email, 
-              password: password } })
+              password: password }})
       }}>
   
         <div className='field'>

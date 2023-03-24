@@ -18,6 +18,8 @@ const GET_USERS_QUERY = gql`
 
 const GET_USER = gql`
     query user( $username: String!, $email: String! ) {
+        user( username: $username, email: $email ) {
+            
             id,
             username,
             name,
@@ -26,6 +28,8 @@ const GET_USER = gql`
             age,
             inventory,
             badge
+
+        }
     }
   
 `

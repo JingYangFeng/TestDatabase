@@ -1,7 +1,7 @@
 import React from 'react'
 import { useQuery } from '@apollo/client'
 import { GET_USERS_QUERY } from '../Queries/queries'
-import RenderArray from './RenderArray'
+import DisplayUser from './DisplayUser'
 
 function UserList() {
 
@@ -14,20 +14,8 @@ function UserList() {
 
   return data.users.map(user => {
     return(
-        <>
-            <h3 className='main-point' key={user.id}>Username: {user.username} </h3>
-            <ol className='no-bullet'>
-                <li>Name: { user.name }</li>
-                <li>Age: { user.age }</li>
-                <li>email: { user.email }</li>
-                <li>password: { user.password }</li>
+      <DisplayUser user={user} />
 
-                <li>badge: <RenderArray item={ user.badge }/> </li>
-                <li>inventory: <RenderArray item={ user.inventory }/></li>
-                <li>events: <RenderArray item={ user.eventsRegistered }/></li>
-            </ol>
-
-        </>
     );
   })
 
