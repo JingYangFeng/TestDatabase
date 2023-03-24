@@ -2,31 +2,47 @@ import { gql } from "apollo-boost"
 
 
 
-const getUsersQuery = gql`
+// Search
+const GET_USERS_QUERY = gql`
     {
         users {
-            id
-            username
-            name
-            age
-            badge
-            inventory
+            id,
+            username,
+            name,
+            age,
+            badge,
+            inventory,
         }
     }
 `
 
+const GET_USER = gql`
+    query user( $username: String!, $email: String! ) {
+            id,
+            username,
+            name,
+            email,
+            password,
+            age,
+            inventory,
+            badge
+    }
+  
+`
 
-// const getUsersQuery = gql`
-//     {
-//         users {
-//             id
-//             username
-//             name
-//             age
-//             badge
-//             inventory
-//         }
-//     }
-// `
 
-export { getUsersQuery, }
+
+// Mutate
+const ADD_USER = gql`
+    mutation addUser( $name: String!, $username: String!, $age: Int!, $email: String!, $password: String! ) {
+        addUser( name: $name, username: $username, age: $age, email: $email, password: $password ) {
+            name,
+            username,
+            age,
+            email,
+            password
+        }
+    }
+`
+
+export { GET_USERS_QUERY, ADD_USER, GET_USER, }

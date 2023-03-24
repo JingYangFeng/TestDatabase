@@ -4,9 +4,9 @@ import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 
 // Components
-import UserList from './Components/UserList';
-import AddUser from './Components/AddUser';
-import UserList2 from './Archive/UserList2';
+import UserList from '../Components/UserList';
+import AddUser from '../Components/AddUser';
+import UserList2 from './UserList2';
 
 
 // Apollo clinet setup

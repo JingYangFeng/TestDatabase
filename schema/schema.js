@@ -21,6 +21,9 @@ const UserType = new GraphQLObjectType({
         name: { type: GraphQLString },
         age: { type: GraphQLInt },
         username: { type: GraphQLString },
+        email: { type: GraphQLString },
+        password: { type: GraphQLString },
+
         badge: { type: new GraphQLList(GraphQLString) },
         inventory: {type: new GraphQLList(GraphQLID)}
     })
@@ -72,12 +75,15 @@ const RootQuery = new GraphQLObjectType({
             type: UserType,
             args: { 
                 id: {type: GraphQLID },
-                username: {type: GraphQLString}
+                username: {type: GraphQLString},
+                email: {type: GraphQLString}
             },
 
             resolve(parent, args){
                 // to get data from database / other source
                 if (args.username) return User.findOne({username: args.username})
+                else if (args.email) return User.findOne({email: args.email})
+
                 if (args.id) return User.findById(args.id)
                 
             }
@@ -158,6 +164,9 @@ const Mutation = new GraphQLObjectType({
                 name: { type: GraphQLString },
                 age: { type: GraphQLInt },
                 username: { type: GraphQLString},
+                email:{ type: GraphQLString },
+                password: { type: GraphQLString},
+                
                 badge: { type: new GraphQLList(GraphQLString) },
                 inventory:{ type: GraphQLString },
                 eventsRegistered: { type: new GraphQLList(GraphQLString)}
@@ -167,6 +176,9 @@ const Mutation = new GraphQLObjectType({
                     name: args.name,
                     age: args.age,
                     username: args.username,
+                    email: args.email,
+                    password: args.password,
+
                     badge: args.badge,
                     inventory: args.inventory,
                     eventsRegistered: args.eventsRegistered

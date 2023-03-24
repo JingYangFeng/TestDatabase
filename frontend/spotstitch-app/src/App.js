@@ -4,6 +4,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 
 import UserList from './Components/UserList';
 import AddUser from './Components/AddUser';
+import SearchUser from './Components/SearchUser';
 
 const client = new ApolloClient({
   uri: "http://localhost:3000/graphql",
@@ -15,10 +16,15 @@ function App() {
     <>
       <ApolloProvider client={client}>
         <div id="main">
+          <h1>Adding Users</h1>
+          <AddUser/>
+
+          <h1>Search User by username or email</h1>
+          <SearchUser/>
 
           <h1>List of Users</h1>
           <UserList/>
-          <AddUser/>
+
         
         </div>
 

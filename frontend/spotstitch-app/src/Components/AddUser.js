@@ -1,60 +1,76 @@
-import React, { Component } from 'react'
-import { graphql } from 'react-apollo'
-import { getUsersQuery } from '../Queries/queries'
+import React, { useState } from 'react'
+import { useQuery, useMutation } from '@apollo/client'
+import { ADD_USER, GET_USERS_QUERY } from '../Queries/queries'
+
+function AddUser() {
 
 
+  const { error, data, loading } = useQuery(GET_USERS_QUERY)
+  const [createUser, 
+    { error: createUserErr, data: createUserdata, loading: createUserLoading}] = useMutation(ADD_USER)
 
-class AddUser extends Component {
 
-  displayAuthors() {
-    var data = this.props.data
-    if (data.loading) {
-      return( <option disabled>Loading Users...</option> )
-    } else {
-      return data.users.map(user => {
-        return( <option key={user.id} value={user.id}>{user.username}</option> )
-      })
-    }
-  }
-    
-  render() {
+  const [username, setUsername] = useState();
+  const [name, setName] = useState();
+  const [age, setAge] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
 
-    return (
-      <form id="add-user">
-        
+
+  console.log({ error, loading, data })
+
+  if (loading) return <div>Loading...</div>
+  if (error) return <div>Error: {error}</div>
+
+  return(
+    <>
+
+      <form id="add-user" onSubmit={(e) => {
+          e.preventDefault();
+          console.log("submitting...", username, name, age)
+
+          createUser({ 
+            variables: { 
+              name: name, 
+              username: username, 
+              age: parseInt(age), 
+              email: email, 
+              password: password } })
+      }}>
+  
         <div className='field'>
-          <label>Username:</label>
-          <input type="text"/>
+          <label>Username: </label>
+          <input type="text" value={username} onChange={ (e) => {setUsername(e.target.value) }}/>
         </div>
 
 
-        <div className='field'>
-          <label>name:</label>
-          <input type="text"/>
-        </div>
+      <div className='field'>
+        <label>name: </label>
+        <input type="text" value={name} onChange={ (e) => {setName(e.target.value) }}/>
+      </div>
 
-        <div className='field'>
-          <label>Age:</label>
-          <input type="text"/>
-        </div>
+      <div className='field'>
+        <label>Age: </label>
+        <input type="number" value={age} onChange={ (e) => {setAge(e.target.value) }}/>
+      </div>
 
-        {/* button
-        
-        <div className='field'>
-          <label>Age:</label>
-          <select>
-            <option>Select Age</option>
-          </select>
-        </div>
+      <div className='field'>
+        <label>Email: </label>
+        <input type="text" value={email} onChange={ (e) => {setEmail(e.target.value) }}/>
+      </div>
 
-        <button>+</button> */}
+      <div className='field'>
+        <label>Password: </label>
+        <input type="text" value={password} onChange={ (e) => {setPassword(e.target.value) }}/>
+      </div>
 
-        {/* badge and inventory defaults here */}
+      <button>+</button>
 
+     </form>
 
-      </form>
-    )
-  }
+    </>
+  );
+
 }
 
 export default AddUser
