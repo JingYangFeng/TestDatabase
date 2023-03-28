@@ -10,6 +10,8 @@ const GET_USERS_QUERY = gql`
             username,
             name,
             age,
+            email,
+            password,
             badge,
             inventory,
         }
