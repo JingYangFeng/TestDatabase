@@ -39,6 +39,7 @@ function AddUser() {
               age: parseInt(age), 
               email: email, 
               password: password,
+              wallet: parseFloat(wallet),
             }})
       }}>
   
@@ -55,7 +56,7 @@ function AddUser() {
 
       <div className='field'>
         <label>Age: </label>
-        <input type="number" value={age} onChange={ (e) => {setAge(e.target.value) }}/>
+        <input type="number" min='0' value={age} onChange={ (e) => {setAge(e.target.value) }}/>
       </div>
 
       <div className='field'>
@@ -70,7 +71,7 @@ function AddUser() {
 
       <div className='field'>
         <label>Wallet: </label>
-        <input type="number" value={wallet} onChange={ (e) => {setWallet(e.target.value) }}/>
+        <input type="number" step='0.01' min='0' value={wallet} onChange={ (e) => {setWallet(e.target.value) }}/>
       </div>
 
       <button>+</button>

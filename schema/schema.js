@@ -26,7 +26,7 @@ const UserType = new GraphQLObjectType({
 
         badge: { type: new GraphQLList(GraphQLString) },
         inventory: {type: new GraphQLList(GraphQLID)},
-        wallet: { type: graphql.GraphQLFloat },
+        wallet: { type: graphql.GraphQLFloat }
     })
 })
 
@@ -71,7 +71,7 @@ const RootQuery = new GraphQLObjectType({
     fields: {
 
         // Finding users ==================================
-        // Finds a single user by id or name
+        // Finds a single user by id or username
         user: {
             type: UserType,
             args: { 
@@ -171,11 +171,11 @@ const Mutation = new GraphQLObjectType({
                 badge: { type: new GraphQLList(GraphQLString) },
                 inventory:{ type: GraphQLString },
                 eventsRegistered: { type: new GraphQLList(GraphQLString)},
-                wallet: { type: graphql.GraphQLFloat },
+                wallet: { type: graphql.GraphQLFloat }
             },
             resolve(parent, args){
                 if (args.wallet == null) args.wallet = 0;
-                // if (args.badge.length == 0) args.badge.push("new");
+                // if (!args.badge.length) args.badge = new Array("New");
 
                 let user = new User({
                     name: args.name,
