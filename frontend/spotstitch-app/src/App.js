@@ -2,7 +2,7 @@ import './App.css';
 import React, { Component } from 'react';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 
-import AddUser from './AdminView/AddUser';
+import AdminViewUser from './AdminView/AdminViewUser';
 
 const client = new ApolloClient({
   uri: "http://localhost:3000/graphql",

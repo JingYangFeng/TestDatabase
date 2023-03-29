@@ -1,5 +1,5 @@
 import React from 'react'
-import RenderArray from './RenderArray'
+import RenderArray from '../Components/RenderArray'
 
 function DisplayUser({user}) {
     if (!user) return
