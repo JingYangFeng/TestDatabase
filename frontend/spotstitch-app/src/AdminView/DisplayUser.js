@@ -10,12 +10,13 @@ function DisplayUser({user}) {
         <ol className='no-bullet'>
             <li>Name: { user.name }</li>
             <li>Age: { user.age }</li>
-            <li>email: { user.email }</li>
-            <li>password: { user.password }</li>
+            <li>Email: { user.email }</li>
+            <li>Password: { user.password }</li>
+            <li>Wallet: { user.wallet }</li>
 
-            <li>badge: <RenderArray item={ user.badge }/> </li>
-            <li>inventory: <RenderArray item={ user.inventory }/></li>
-            <li>events: <RenderArray item={ user.eventsRegistered }/></li>
+            <li>Badge: <RenderArray item={ user.badge }/> </li>
+            <li>Inventory: <RenderArray item={ user.inventory }/></li>
+            <li>Events: <RenderArray item={ user.eventsRegistered }/></li>
         </ol>
 
     </>

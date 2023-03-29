@@ -9,6 +9,7 @@ function AddUser() {
   const [age, setAge] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [wallet, setWallet] = useState();
 
   const { error, data, loading } = useQuery(GET_USERS_QUERY)
   const [createUser, 
@@ -37,7 +38,8 @@ function AddUser() {
               username: username, 
               age: parseInt(age), 
               email: email, 
-              password: password }})
+              password: password,
+            }})
       }}>
   
         <div className='field'>
@@ -64,6 +66,11 @@ function AddUser() {
       <div className='field'>
         <label>Password: </label>
         <input type="text" value={password} onChange={ (e) => {setPassword(e.target.value) }}/>
+      </div>
+
+      <div className='field'>
+        <label>Wallet: </label>
+        <input type="number" value={wallet} onChange={ (e) => {setWallet(e.target.value) }}/>
       </div>
 
       <button>+</button>

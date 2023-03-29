@@ -25,7 +25,8 @@ const UserType = new GraphQLObjectType({
         password: { type: GraphQLString },
 
         badge: { type: new GraphQLList(GraphQLString) },
-        inventory: {type: new GraphQLList(GraphQLID)}
+        inventory: {type: new GraphQLList(GraphQLID)},
+        wallet: { type: graphql.GraphQLFloat },
     })
 })
 
@@ -169,9 +170,13 @@ const Mutation = new GraphQLObjectType({
                 
                 badge: { type: new GraphQLList(GraphQLString) },
                 inventory:{ type: GraphQLString },
-                eventsRegistered: { type: new GraphQLList(GraphQLString)}
+                eventsRegistered: { type: new GraphQLList(GraphQLString)},
+                wallet: { type: graphql.GraphQLFloat },
             },
             resolve(parent, args){
+                if (args.wallet == null) args.wallet = 0;
+                // if (args.badge.length == 0) args.badge.push("new");
+
                 let user = new User({
                     name: args.name,
                     age: args.age,
@@ -181,7 +186,8 @@ const Mutation = new GraphQLObjectType({
 
                     badge: args.badge,
                     inventory: args.inventory,
-                    eventsRegistered: args.eventsRegistered
+                    eventsRegistered: args.eventsRegistered,
+                    wallet: args.wallet,
 
                 })
                 user.save()
@@ -203,7 +209,8 @@ const Mutation = new GraphQLObjectType({
                     { username: args.username }, // Usernames must match to change user information
                     { $set:{
                         name: args.name, 
-                        age: args.age} 
+                        age: args.age
+                        } 
                     })
             }
         },
