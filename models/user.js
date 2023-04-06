@@ -6,7 +6,7 @@ const coll = 'users'
 const userSchema = new Schema({
     name: String,           // Name
     age: Number,            // Age
-    dateOfBirth: String,    // yyyymmdd
+    dateOfBirth: String,    // yyyy-mm-dd
     username: String,       // Username
     email: String,
     password: String,
