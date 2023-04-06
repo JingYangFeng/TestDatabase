@@ -60,4 +60,18 @@ const ADD_USER = gql`
     }
 `
 
-export { GET_USERS_QUERY, ADD_USER, GET_USER, }
+const UPDATE_USER = gql`
+    mutation updateUser( $name: String!, $username: String!, $email: String!, $password: String!, $dateOfBirth: String!, $wallet: Float! ) {
+        updateUser( name: $name, username: $username, email: $email , password: $password, dateOfBirth: $dateOfBirth, wallet: $wallet ) {
+            username,
+            name,
+            dateOfBirth,
+            email,
+            password,
+            wallet
+        }
+    }
+  
+`
+
+export { GET_USERS_QUERY, ADD_USER, GET_USER, UPDATE_USER, }

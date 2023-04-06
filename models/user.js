@@ -15,7 +15,11 @@ const userSchema = new Schema({
                             //         Ex an Intermediate level has all permissions as Beginner level + a few more
     inventory: Array,       // Each element in this array has the id for the specific models in inventoryModels collection
     eventsRegistered: Array,
-    wallet: Number
+    wallet: Number,
+
+    locationHistory: Array,
+    deviceType: Array
+    
 })
 
 
@@ -45,7 +49,7 @@ const userSchema = new Schema({
 //          - For security (include this in a user session table, which is a unique table)
 //          - Do we have data for this app?
 //
-//      User type
+//      User type (To be stored in badges)
 //          - Educator
 //          - Student
 //          - Admin

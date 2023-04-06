@@ -26,8 +26,11 @@ const UserType = new GraphQLObjectType({
         password: { type: GraphQLString },
 
         badge: { type: new GraphQLList(GraphQLString) },
-        inventory: {type: new GraphQLList(GraphQLID)},
-        wallet: { type: graphql.GraphQLFloat }
+        inventory: { type: new GraphQLList(GraphQLID) },
+        wallet: { type: graphql.GraphQLFloat },
+
+        locationHistory: { type: new GraphQLList(GraphQLID) },
+        deviceType: { type: new GraphQLList(GraphQLString) }
     })
 })
 
@@ -203,8 +206,10 @@ const Mutation = new GraphQLObjectType({
             args: {
                 username: { type: GraphQLString},
                 name: { type: GraphQLString },
-                dateOfBirth: { type: GraphQLInt },
+                email: { type: GraphQLString },
                 password: { type: GraphQLString },
+                dateOfBirth: { type: GraphQLString },
+                wallet: { type: graphql.GraphQLFloat },
             },
             resolve(parent, args){
                 return User.updateOne(
@@ -212,7 +217,10 @@ const Mutation = new GraphQLObjectType({
                     { $set:{
                         name: args.name, 
                         age: getAge(args.dateOfBirth),
+                        email: args.email,
                         password: args.password,
+                        dateOfBirth: args.dateOfBirth,
+                        wallet: args.wallet,
                         } 
                     })
             }
