@@ -43,12 +43,13 @@ const GET_USER = gql`
 
 // Mutate
 const ADD_USER = gql`
-    mutation addUser( $name: String!, $username: String!, $age: Int!, $email: String!, $password: String!, $wallet: Float!) {
-        addUser( name: $name, username: $username, age: $age, email: $email, password: $password, wallet: $wallet ) {
+    mutation addUser( $name: String!, $username: String!, $email: String!, $password: String!,  $dateofBirth: Int!, $age: Int!, $wallet: Float!) {
+        addUser( name: $name, username: $username, email: $email, password: $password, dateofBirth: $dateofBirth, age: $age, wallet: $wallet ) {
             username,
             name,
             email,
             password
+            dateofBirth,
             age,
             
             badge,

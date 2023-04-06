@@ -20,6 +20,7 @@ const UserType = new GraphQLObjectType({
         id: { type: GraphQLID },
         name: { type: GraphQLString },
         age: { type: GraphQLInt },
+        dateOfBirth: { type: GraphQLString },
         username: { type: GraphQLString },
         email: { type: GraphQLString },
         password: { type: GraphQLString },
@@ -61,8 +62,6 @@ const EventPostType = new GraphQLObjectType({
         location: { type: GraphQLString }
     })
 })
-
-
 
 
 
@@ -163,14 +162,15 @@ const Mutation = new GraphQLObjectType({
             type: UserType,
             args: {
                 name: { type: GraphQLString },
-                age: { type: GraphQLInt },
-                username: { type: GraphQLString},
+                username: { type: GraphQLString },
                 email:{ type: GraphQLString },
-                password: { type: GraphQLString},
+                password: { type: GraphQLString },
+                dateOfBirth: { type: GraphQLString },
+                age: { type: GraphQLInt },
                 
                 badge: { type: new GraphQLList(GraphQLString) },
                 inventory:{ type: GraphQLString },
-                eventsRegistered: { type: new GraphQLList(GraphQLString)},
+                eventsRegistered: { type: new GraphQLList(GraphQLString) },
                 wallet: { type: graphql.GraphQLFloat }
             },
             resolve(parent, args){
@@ -179,10 +179,12 @@ const Mutation = new GraphQLObjectType({
 
                 let user = new User({
                     name: args.name,
-                    age: args.age,
                     username: args.username,
                     email: args.email,
                     password: args.password,
+
+                    dateOfBirth: args.dateOfBirth,
+                    age: getAge(args.dateOfBirth),
 
                     badge: args.badge,
                     inventory: args.inventory,
@@ -200,16 +202,17 @@ const Mutation = new GraphQLObjectType({
             type: UserType,
             args: {
                 username: { type: GraphQLString},
-
                 name: { type: GraphQLString },
-                age: { type: GraphQLInt },
+                dateOfBirth: { type: GraphQLInt },
+                password: { type: GraphQLString },
             },
             resolve(parent, args){
                 return User.updateOne(
                     { username: args.username }, // Usernames must match to change user information
                     { $set:{
                         name: args.name, 
-                        age: args.age
+                        age: getAge(args.dateOfBirth),
+                        password: args.password,
                         } 
                     })
             }
@@ -258,6 +261,20 @@ module.exports = new GraphQLSchema({
     query: RootQuery,
     mutation: Mutation
 })
+
+
+// Extra Functions =================
+
+function getAge(dateString) {
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age;
+}
 
 
 // // dummy data

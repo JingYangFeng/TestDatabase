@@ -1,12 +1,16 @@
 import React, { useState } from 'react'
 import { useQuery, useMutation } from '@apollo/client'
 import { ADD_USER, GET_USERS_QUERY } from '../Queries/queries'
+import getAge from '../../GeneralFunctions/getAge';
+
+
+
 
 function AddUser() {
 
   const [username, setUsername] = useState();
   const [name, setName] = useState();
-  const [age, setAge] = useState();
+  const [dateOfBirth, setDateOfBirth] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [wallet, setWallet] = useState();
@@ -16,9 +20,6 @@ function AddUser() {
     { error: createUserErr, data: createUserdata, loading: createUserLoading}] = useMutation(ADD_USER, {
       refetchQueries: [{query: GET_USERS_QUERY}]
     })
-
-
-
 
   console.log({ error, loading, data })
 
@@ -30,13 +31,14 @@ function AddUser() {
 
       <form id="add-user" onSubmit={(e) => {
           e.preventDefault();
-          console.log("submitting...", username, name, age)
+          console.log("submitting...", username, name, dateOfBirth)
 
           createUser({ 
             variables: { 
               name: name, 
               username: username, 
-              age: parseInt(age), 
+              dateOfBirth: dateOfBirth, 
+              age: parseInt(getAge(dateOfBirth)),
               email: email, 
               password: password,
               wallet: parseFloat(wallet),
@@ -55,8 +57,8 @@ function AddUser() {
       </div>
 
       <div className='field'>
-        <label>Age: </label>
-        <input type="number" min='0' value={age} onChange={ (e) => {setAge(e.target.value) }}/>
+        <label>Date of Birth (yyyy-mm-dd): </label>
+        <input type="text" value={dateOfBirth} onChange={ (e) => {setDateOfBirth(e.target.value) }}/>
       </div>
 
       <div className='field'>

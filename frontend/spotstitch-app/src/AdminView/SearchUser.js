@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useLazyQuery, useQuery } from '@apollo/client'
+import { useLazyQuery } from '@apollo/client'
 import { GET_USER } from '../Queries/queries'
 import DisplayUser from './DisplayUser';
 
@@ -13,12 +13,11 @@ function SearchUser() {
   const [ getUser, { error, data, loading }] = useLazyQuery(GET_USER, {
     onCompleted: (queryData) => {
       console.log(queryData)
-
       console.log("_____________________________")
       
 
     },
-    onCompleted: (errorData) => {
+    onError: (errorData) => {
       // console.log(errorData)
     }
   },
