@@ -46,7 +46,7 @@ function SearchUser() {
       </div>
 
       <button 
-        onClick={() => getUser({variables: {username: username, email: email}})}
+        onClick={() => getUser({ variables: {username: username, email: email} })}
       >
         Search User
       </button>

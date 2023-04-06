@@ -14,7 +14,7 @@ function UserList() {
 
   return data.users.map(user => {
     return(
-      <DisplayUser user={user} />
+      <DisplayUser user={user} key={user.id} />
 
     );
   })

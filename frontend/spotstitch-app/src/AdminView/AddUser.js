@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useQuery, useMutation } from '@apollo/client'
 import { ADD_USER, GET_USERS_QUERY } from '../Queries/queries'
-import getAge from '../../GeneralFunctions/getAge';
+import getAge from '../GeneralFunctions/getAge';
 
 
 
@@ -38,7 +38,7 @@ function AddUser() {
               name: name, 
               username: username, 
               dateOfBirth: dateOfBirth, 
-              age: parseInt(getAge(dateOfBirth)),
+              age: getAge(dateOfBirth),
               email: email, 
               password: password,
               wallet: parseFloat(wallet),

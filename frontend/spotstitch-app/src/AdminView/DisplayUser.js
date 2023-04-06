@@ -10,6 +10,7 @@ function DisplayUser({user}) {
         <ol className='no-bullet'>
             <li>Name: { user.name }</li>
             <li>Age: { user.age }</li>
+            <li>Date of Birth: { user.dateOfBirth }</li>
             <li>Email: { user.email }</li>
             <li>Password: { user.password }</li>
             <li>Wallet: { user.wallet }</li>
