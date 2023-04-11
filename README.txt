@@ -29,4 +29,14 @@ To run frontend (from root folder):
 
 All instances of users will appear on the page, even newly added ones, without refresh
 
+
+## Finding User information(from root folder):
+    cd ./backend/schema/schema.js
+    you will find "Const UserType" which lists all user information
+
+# for more specifics and documentation
+    cd ./backend/models/user.js
+
+
+
 For further questions, message Jason Feng on Slack
