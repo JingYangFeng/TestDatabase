@@ -1,5 +1,6 @@
 Musts before testing:
 - Install Node.js (if not already)
+    https://nodejs.org/en/download
 
 # Install React
 cd ./frontend/spotstitch/
