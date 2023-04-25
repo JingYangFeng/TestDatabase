@@ -25,6 +25,10 @@ const UserType = new GraphQLObjectType({
         email: { type: GraphQLString },
         password: { type: GraphQLString },
 
+        picture: { type: GraphQLString },
+        newMessages: { type: new GraphQLList(GraphQLString) },
+        status: { type: GraphQLString },
+
         badge: { type: new GraphQLList(GraphQLString) },
         inventory: { type: new GraphQLList(GraphQLID) },
         wallet: { type: graphql.GraphQLFloat },

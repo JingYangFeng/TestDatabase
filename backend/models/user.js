@@ -4,12 +4,49 @@ const Schema = mongoose.Schema
 const coll = 'users'
 
 const userSchema = new Schema({
-    name: String,           // Name
-    age: Number,            // Age
-    dateOfBirth: String,    // yyyy-mm-dd
-    username: String,       // Username
-    email: String,
-    password: String,
+    
+    name: {                 // Name
+        type: String,
+        required: [true, "Can't be blank"]
+    },     
+
+    age: Number,            // Age is deteremined by dateofBirth
+
+    dateOfBirth: {          // yyyy-mm-dd
+        type: String,   
+        required: [true, "Can't be blank"]
+    },    
+    
+    username: {                 // Username
+        type: String,
+        required: [true, "Can't be blank"]
+    }, 
+
+    email: {
+        type: String,
+        lowercase: true,
+        unique: true,
+        required: [true, "Can't be blank"],
+        index: true,
+        validate: [isEmail, "invalid email"]
+    },
+
+    password: {
+        type: String,
+        required: [true, "Can't be blank"]
+    },
+
+    picture: {
+        type: String,   // String is an ID to an image in database
+    },
+    newMessages: {
+        type: Object,
+        default: {}
+    },
+    status: {
+        type: String,
+        default: 'online'
+    },
     
     badge: Array,           // Badge:  Ex Beginner, Advance, etc. (Each badge has certain permissions. Level+1 has all permisions of Levels and a few more)
                             //         Ex an Intermediate level has all permissions as Beginner level + a few more
