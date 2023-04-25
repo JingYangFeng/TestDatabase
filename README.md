@@ -2,8 +2,8 @@
 - Install Node.js (if not already)
     https://nodejs.org/en/download
 
-## Install React
-cd ./frontend/spotstitch/
+## Install React:
+    cd ./frontend/spotstitch/
     npm i react
 
 
@@ -29,7 +29,7 @@ All instances of users will appear on the page, even newly added ones, without r
 
 ## Finding User information(from root folder):
     cd ./backend/schema/schema.js
-    you will find "Const UserType" which lists all user information
+you will find "Const UserType" which lists all user information
 
 # for more specifics and documentation
     cd ./backend/models/user.js
