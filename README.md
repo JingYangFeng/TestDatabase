@@ -1,14 +1,14 @@
-Musts before testing:
+# Musts before testing:
 - Install Node.js (if not already)
     https://nodejs.org/en/download
 
-# Install React
+## Install React
 cd ./frontend/spotstitch/
     npm i react
 
 
 
-## How to run ====================================
+# How to run ====================================
 
 # Must run server first ----
 
