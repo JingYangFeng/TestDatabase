@@ -34,7 +34,7 @@ All instances of users will appear on the page, even newly added ones, without r
     cd ./backend/models/user.js
 
 
-**Please make a new branch if you are on main
+**Please make a new branch if you are on main**
 
 
 For further questions, message Jason Feng on Slack
