@@ -14,7 +14,7 @@
 ## To run server (from root folder):
     cd backend
     nodemon app
-- Must be in ./backend folder since app.js in is there, and nodemon runs that file
+Must be in ./backend folder since app.js in is there, and nodemon runs that file
 
 
 
@@ -28,7 +28,7 @@ All instances of users will appear on the page, even newly added ones, without r
 
 ## Finding User information(from root folder):
     cd ./backend/schema/schema.js
-- You will find "Const UserType" which lists all user information
+You will find "Const UserType" which lists all user information
 
 # for more specifics and documentation:
     cd ./backend/models/user.js
