@@ -10,7 +10,7 @@ cd ./frontend/spotstitch/
 
 # How to run
 
-# Must run server first
+## Must run server first
 
 To run server (from root folder):
 - cd backend
