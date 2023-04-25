@@ -8,23 +8,20 @@ cd ./frontend/spotstitch/
 
 
 
-# How to run ====================================
+# How to run
 
-# Must run server first ----
+# Must run server first
 
 To run server (from root folder):
-    cd backend
-    nodemon app
-    # Must be in ./backend folder since app.js in is there, and nodemon runs that file
+- cd backend
+- nodemon app
+- Must be in ./backend folder since app.js in is there, and nodemon runs that file
 
-----
 
 
 To run frontend (from root folder):
     cd frontend/spotstitch
     npm run start
-
-==================================================
 
 
 All instances of users will appear on the page, even newly added ones, without refresh
@@ -38,7 +35,7 @@ All instances of users will appear on the page, even newly added ones, without r
     cd ./backend/models/user.js
 
 
-** Please make a new branch if you are on main
+**Please make a new branch if you are on main
 
 
 For further questions, message Jason Feng on Slack
