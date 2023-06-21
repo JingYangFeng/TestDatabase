@@ -4,14 +4,14 @@ const mongoose = require("mongoose");
 // Own testing
 // ====================================================================================================================
 let dbConnection
-// let uri = 'mongodb+srv://testUser:FlyHigh22@testcluster.j4agrqt.mongodb.net/?retryWrites=true&w=majority'
+// let uri = ''
 
 // db = 'UserInformation'
-// mongoose.connect('mongodb+srv://testUser:FlyHigh22@testcluster.j4agrqt.mongodb.net/' + db + '?retryWrites=true&w=majority');
+// mongoose.connect('');
 
 // P:HC testing
 // // // ====================================================================================================================
-let uri = 'mongodb+srv://dbadmin:t5bIj0bVJHdrXLvB@phc-cluster.sxtfgeu.mongodb.net/?retryWrites=true&w=majority'
+let uri = ''
 
 db = 'spotstitch'
 mongoose.connect('mongodb+srv://dbadmin:t5bIj0bVJHdrXLvB@phc-cluster.sxtfgeu.mongodb.net/' + db + '?retryWrites=true&w=majority');
